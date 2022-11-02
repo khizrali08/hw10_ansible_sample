@@ -29,7 +29,7 @@ atlanta:
 
 Create new groups
 
-`
+```
 [STAGING_NEW:children]
 alias1
 alias2
@@ -37,15 +37,13 @@ alias2
 [STAGING_NEW::vars]
 
 
-`
+```
 Crate new directory
 `mkdir group_vars`
 or
 `mkdir host_vars`
 
 `vim group_vars/ALIAS.yml` - for alias
-
-
 
 `vim groups/all.yml` - for all
 
