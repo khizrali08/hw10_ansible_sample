@@ -1,7 +1,7 @@
 ##
 - hosts.ini vs hosts.yml
 
-`
+```
 [atlanta]
 host1
 host2
@@ -9,7 +9,7 @@ host2
 [atlanta:vars]
 ntp_server=ntp.atlanta.example.com
 proxy=proxy.atlanta.example.com
-
+```
 vs
 
 ```
