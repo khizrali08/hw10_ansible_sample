@@ -1,0 +1,38 @@
+---
+
+- name: Test
+  hosts: all
+  become: true  # optional
+
+  vars:
+    msg1: Hello
+    msg2: World
+    number2: 2
+    source: test_confi.ini.j2
+    dest: /tmp/config.ini
+
+
+  tasks:
+
+     - name: Copy
+       template:
+          src:  '{{ source }}'
+          dest: '{{ dest }}'
+          mode: 0555
+
+
+    # - name: Setup #optinal
+    #   debug:
+    #     msg: "msg1 = {{ msg1 }}, msg2 = {{ msg2 }}"
+
+    # - debug:
+    #     var: ansible_os_family
+
+    # - name: Run shell uptime
+    #   shell:
+    #     uptime
+    #   register:
+    #     result
+
+    # - debug:
+    #     msg: " Shell comand resut = {{ result.stdout }} "

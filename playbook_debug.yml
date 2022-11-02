@@ -1,0 +1,36 @@
+---
+- name: Debug Playbook
+  hosts: all
+  become: yes
+
+
+  vars:
+    message1: Hello
+    message2: World
+
+  tasks:
+
+    - name: Print
+      debug:
+        var: message1
+
+    - debug:
+        msg: "Test Test {{ message1 }}"
+
+    - set_fact: message3 = "{{ message1 }} {{ message2 }}"
+
+    - debug:
+        var: message3
+    
+    - shell: uptime
+      register: results
+
+    - debug:
+        var: results
+
+    - debug:
+        var: ansible_os_family 
+    
+
+
+

@@ -1,0 +1,63 @@
+---
+
+- name: Install
+  hosts: all
+  become: true  # optional
+
+
+  vars:
+    source: index.html
+    dest: /var/www/html
+
+
+  tasks:
+
+   ## RedHat
+    - name: Install RedHat
+      block:
+      - name: Install Apache Redhat
+        yum:
+          name: httpd
+          state: latest
+      
+
+      - name: Start WebServer and make it run on srartup
+        service: name=httpd state=started enabled=yes
+    
+      - name: Copy
+        copy: #src = {{ source }} dest = {{ dest }} mode=0555
+          src:  '{{ source }}'
+          dest: '{{ dest }}'
+          mode: 0555
+        notify: Restart Apache RedHat
+
+      when: ansible_os_family == 'RedHat'
+ 
+    ### Debian
+    - name: Install Debian
+      block:
+      - name: Install Apache Debian
+        apt:
+          name: apache2
+          state: latest
+          update_cache: yes
+
+      - name: Copy
+        copy: #src = {{ source }} dest = {{ dest }} mode=0555
+          src:  '{{ source }}'
+          dest: '{{ dest }}'
+          mode: 0555
+        notify: Restart Apache Debian
+
+      - name: Start WebServer and make it run on srartup
+        service: name=apache2 state=started enabled=yes
+      
+      when: ansible_os_family == 'Debian'
+
+
+  handlers:
+    - name: Restart Apache RedHat
+      service: name=httpd state=started enabled=yes
+    - name: Restart Apache Debian
+      service: name=apache2 state=started enabled=yes
+
