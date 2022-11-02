@@ -12,7 +12,7 @@ proxy=proxy.atlanta.example.com
 
 vs
 
-`
+```
 atlanta:
   hosts:
     host1:
@@ -20,7 +20,7 @@ atlanta:
   vars:
     ntp_server: ntp.atlanta.example.com
     proxy: proxy.atlanta.example.com
-`
+```
 
 
 
