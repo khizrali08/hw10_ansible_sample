@@ -1,0 +1,19 @@
+- name: Install Debian
+  block:
+  - name: Install Apache Debian
+    apt:
+      name: apache2
+      state: latest
+      update_cache: yes
+
+  - name: Copy
+    copy: #src = {{ source }} dest = {{ dest }} mode=0555
+      src:  '{{ source }}'
+      dest: '{{ dest }}'
+      mode: 0555
+    notify: Restart Apache Debian
+
+  - name: Start WebServer and make it run on startup
+    service: name=apache2 state=started enabled=yes
+  
+  when: ansible_os_family == 'Debian'

@@ -1,0 +1,7 @@
+- name: Test 3
+  hosts: agent5_linux
+  become: true  # optional
+  any_errors_fatal: true
+  gather_facts: true
+  roles:
+    - jenkins

@@ -1,0 +1,18 @@
+- name: Install RedHat
+  block:
+  - name: Install Apache Redhat
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Start WebServer and make it run on startup
+    service: name=httpd state=started enabled=yes
+
+  - name: Copy
+    copy: #src = {{ source }} dest = {{ dest }} mode=0555
+      src:  '{{ source }}'
+      dest: '{{ dest }}'
+      mode: 0555
+    notify: Restart Apache RedHat
+
+  when: ansible_os_family == 'RedHat'

@@ -64,3 +64,14 @@ or
 - Jinja 
 template: src = {{}} like copy
 
+- Error hanling
+
+failed_when:
+ignore_erroes:
+any_errors_fatal
+
+- Vault
+encrypt, decrypt
+
+- Ansiblke roles
+galaxy, 

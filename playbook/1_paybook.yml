@@ -1,8 +1,11 @@
 ---
 
 - name: Test
-  hosts: all
+  hosts: agent5_linux
   become: true  # optional
+  any_errors_fatal: true
+  gather_facts: true
+
 
   vars:
     msg1: Hello
@@ -13,14 +16,13 @@
 
 
   tasks:
-
-     - name: Copy
-       template:
-          src:  '{{ source }}'
-          dest: '{{ dest }}'
-          mode: 0555
-
-
+    - name: Import
+      include_vars:
+        file: vault_vars.yml
+    
+    - include_role:
+        name: deploy_apache
+    
     # - name: Setup #optinal
     #   debug:
     #     msg: "msg1 = {{ msg1 }}, msg2 = {{ msg2 }}"
